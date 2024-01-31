@@ -116,12 +116,12 @@ export const PostHeader = ({ post, morePosts }: Props) => {
 	return (
 		<Fragment>
 			<div className="blog-article-page container relative mx-auto grid grid-cols-8">
-				<div className="col-span-full lg:col-span-6 lg:col-start-2">
+				<div className="col-span-full lg:col-span-6 lg:col-start-2 rounded-md">
 					{/* Top cover */}
 					{post.coverImage?.url && !post.preferences.stickCoverToBottom && (
 						<div className="relative">
 							<CustomImage
-								className="mb-0 block w-full"
+								className="md:rounded-[0.5rem] mb-0 block w-full"
 								placeholder="blur"
 								originalSrc={post.coverImage.url}
 								src={resizeImage(post.coverImage.url, {
@@ -135,8 +135,8 @@ export const PostHeader = ({ post, morePosts }: Props) => {
 										...(!post.coverImage.isPortrait ? { c: 'thumb' } : { fill: 'blur' }),
 									}),
 								)}
-								width={1600}
-								height={840}
+								width={784}
+								height={410}
 								alt={post.title}
 								priority
 								layout="responsive"

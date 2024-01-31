@@ -165,6 +165,11 @@ module.exports = {
 					thead: {
 					  fontWeight: 600,
 					},
+					img: {
+						display: 'block',
+						borderRadius: '0.5rem',
+						margin: '1.5rem auto !important',
+					  },
 				  },
 				},
 				dark: {

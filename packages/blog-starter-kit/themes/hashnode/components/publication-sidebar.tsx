@@ -72,11 +72,9 @@ function PublicationSidebar(props: Props) {
           >
             <div
               className={twJoin(
-                'flex items-center justify-between pl-8 pr-4', 'dark:text-white',
+                'flex items-start justify-end pl-4 pr-8', 'dark:text-white',
               )}
             >
-              <PublicationLogo publication={publication} size="xs" withProfileImage isPostPage={isPostPage} />
-
               <DialogPrimitive.Close asChild>
                 <button
                   type="button"
@@ -98,8 +96,7 @@ function PublicationSidebar(props: Props) {
           </div>
 
           <CustomScrollArea>
-            <div className="py-10 pl-8 pr-4">
-              <h2 className="mb-4 text-sm font-semibold uppercase text-slate-500 dark:text-slate-400">Blog menu</h2>
+            <div className="py-10 pl-8 pr-4 text-2xl font-extrabold">
               <PublicationSidebarNavLinks
                 isHome={isHome}
                 isBadge={isBadge}
@@ -107,15 +104,6 @@ function PublicationSidebar(props: Props) {
                 enabledPages={enabledPages}
                 navbarItems={navbarItems}
               />
-
-              {userHasSocialLinks ? (
-                <>
-                  <h2 className="mb-4 text-sm font-semibold uppercase leading-6 text-slate-500 dark:text-slate-400">
-                    Blog socials
-                  </h2>
-                  <PublicationSocialLinks links={publication.links} isSidebar />
-                </>
-              ) : null}
             </div>
           </CustomScrollArea>
         </DialogPrimitive.Content>

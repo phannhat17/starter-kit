@@ -24,7 +24,7 @@ const textStyles = {
 } as const;
 
 const logoSizes = {
-  xs: 'w-44',
+  xs: 'w-32',
   sm: 'w-44',
   lg: 'w-64',
   xl: 'w-64',
@@ -58,10 +58,10 @@ const CustomLogo = ({
         <CustomImage
           priority
           className="block w-full"
-          src={resizeImage(logoSrc, { w: 1000, h: 250, c: 'thumb' })}
+          src={logoSrc || ''}
           originalSrc={logoSrc || ''}
-          width={1000}
-          height={250}
+          width={300}
+          height={80}
           alt={blogTitle}
         />
       </Link>
