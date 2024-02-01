@@ -4,6 +4,7 @@ import { twJoin } from 'tailwind-merge';
 /* eslint-disable no-nested-ternary */
 import HeaderBlogSearch from './header-blog-search';
 import HeaderLeftSidebar from './header-left-sidebar';
+import PublicationNavLinks from './publication-nav-links';
 import useStickyNavScroll from './use-sticky-nav-scroll';
 
 import {
@@ -46,6 +47,13 @@ const PostPageNavbar = forwardRef<HTMLElement, Props>((props, ref) => {
 				</div>
 
 				<div className={twJoin('flex flex-row items-center', 'dark:text-white')}>
+					{/* Moved PublicationNavLinks here */}
+					<div className="hidden md:block">
+							<PublicationNavLinks
+								enabledPages={publication.preferences?.enabledPages}
+								navbarItems={publication.preferences?.navbarItems || []}
+							/>
+						</div>
 					<HeaderBlogSearch publication={publication} />
 					<div className="md:hidden">
 						<HeaderLeftSidebar publication={publication} />
