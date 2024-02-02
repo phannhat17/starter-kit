@@ -31,6 +31,19 @@ function TocRow(props: TocRowProps) {
   const [childrenVisibility, setChildrenVisibility] = useState(false);
   const { hide: hideTocModal } = useTocModalStore();
 
+  const scrollToElement = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, targetId: string) => {
+    event.preventDefault(); // Prevent the default anchor behavior
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (modal && hideTocModal) {
+        // Additional logic to hide the modal if present
+        hideTocModal();
+      }
+    }
+  };
+
   return (
     <li key={node.id} className="px-2 py-0.5 align-middle">
       <div
@@ -56,27 +69,14 @@ function TocRow(props: TocRowProps) {
         )}
         <a
           id={node.id}
-          className={twJoin(
-            'w-full py-2.5 pr-2.5 text-sm font-medium text-slate-800 dark:text-slate-100',
-            !node.hasChildren && 'pl-3',
-          )}
+          className="w-full py-2.5 pr-2.5 text-sm font-medium text-slate-800 dark:text-slate-100"
           href={`#heading-${node.slug}`}
-          onClick={() => {
-            if (hideTocModal && modal) {
-              // This rAF is required to prevent flickering of the navbar when the user clicks on a link in the TOC modal
-              requestAnimationFrame(() => {
-                hideTocModal();
-              });
-            }
-          }}
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{
-            __html: node.title,
-          }}
+          onClick={(e) => scrollToElement(e, `heading-${node.slug}`)}
+          dangerouslySetInnerHTML={{ __html: node.title }}
           aria-label={node.title}
         />
       </div>
-      {node.hasChildren ? <> {childrenVisibility && <div className="pl-5">{children}</div>} </> : <>{children}</>}
+      {node.hasChildren ? <>{childrenVisibility && <div className="pl-5">{children}</div>}</> : <>{children}</>}
     </li>
   );
 }
