@@ -1,16 +1,14 @@
-import moment from 'dayjs';
-import request from 'graphql-request';
+import React, { useEffect, useRef, useState } from 'react';
 import ErrorPage from 'next/error';
 import Head from 'next/head';
 
 import { Container } from '../../components/container';
 import { AppProvider } from '../../components/contexts/appContext';
 import { Layout } from '../../components/layout';
+import { useThemeStore } from '../../components/contexts/themeContext';
 
 import { markdownToHtml } from '@starter-kit/utils/renderer/markdownToHtml';
-import { useEffect, useRef } from 'react';
 import { twJoin } from 'tailwind-merge';
-import { useThemeStore } from '../../components/contexts/themeContext';
 import CustomImage from '../../components/custom-image';
 import DraftFloatingMenu from '../../components/draft-floating-menu';
 import { Header } from '../../components/header';
@@ -18,6 +16,9 @@ import { BookOpenSVG } from '../../components/icons/svgs';
 import ProfileImage from '../../components/profile-image';
 import PublicationFooter from '../../components/publication-footer';
 import TocRenderDesign from '../../components/toc-render-design';
+import moment from 'dayjs';
+import request from 'graphql-request';
+
 import {
 	DraftByIdDocument,
 	DraftByIdQuery,
@@ -40,6 +41,17 @@ type Props = {
 
 export default function Post({ publication, draft }: Props) {
 	const headerRef = useRef<HTMLElement | null>(null);
+	const { theme } = useThemeStore();
+  
+	useEffect(() => {
+	  // This effect will now correctly apply regardless of the early return
+	  document.body.className = theme;
+	}, [theme]);
+  
+	if (!draft) {
+	  return <ErrorPage statusCode={404} />;
+	}
+
 	if (!draft) {
 		return <ErrorPage statusCode={404} />;
 	}
@@ -67,12 +79,6 @@ export default function Post({ publication, draft }: Props) {
 			}
 		},
 	});
-
-	const { theme } = useThemeStore();
-
-	useEffect(() => {
-		document.body.className = theme;
-	}, [theme]);
 
 	const allTags = draft.tags;
 	const toc = draft.features?.tableOfContents?.isEnabled
