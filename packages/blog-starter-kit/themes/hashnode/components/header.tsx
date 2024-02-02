@@ -1,3 +1,4 @@
+import ThemeToggleButton from './ThemeToggleButton';
 import { useAppContext } from './contexts/appContext';
 import HeaderBlogSearch from './header-blog-search';
 import HeaderLeftSidebar from './header-left-sidebar';
@@ -28,7 +29,7 @@ export const Header = (props: Props) => {
 						</div>
 					</div>
 
-					<div className="mt-auto md:mt-3 flex flex-row items-center dark:text-white">
+					<div className="mt-auto flex flex-row items-center dark:text-white md:mt-3">
 						{/* Moved PublicationNavLinks here */}
 						<div className="hidden md:block">
 							<PublicationNavLinks
@@ -39,6 +40,8 @@ export const Header = (props: Props) => {
 							/>
 						</div>
 						<HeaderBlogSearch publication={publication} />
+						<ThemeToggleButton />
+
 						<div className="md:hidden">
 							<HeaderLeftSidebar publication={publication} />
 						</div>

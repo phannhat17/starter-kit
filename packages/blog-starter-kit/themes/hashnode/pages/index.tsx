@@ -2,7 +2,7 @@ import { InferGetStaticPropsType } from 'next';
 import { WithUrqlProps, initUrqlClient } from 'next-urql';
 import Head from 'next/head';
 import Image from 'next/legacy/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { twJoin } from 'tailwind-merge';
 import { useQuery } from 'urql';
 
@@ -22,6 +22,7 @@ import { createHeaders, createSSRExchange, getUrqlClientConfig } from '../lib/ap
 
 import FeaturedPosts from '../components/features-posts';
 
+import { useThemeStore } from '../components/contexts/themeContext';
 import PublicationFooter from '../components/publication-footer';
 import PublicationMeta from '../components/publication-meta';
 import { resizeImage } from '../utils/image';
@@ -88,6 +89,12 @@ export default function Index(
 				setFetching(false);
 			});
 	};
+
+	const { theme } = useThemeStore();
+
+	useEffect(() => {
+		document.body.className = theme;
+	}, [theme]);
 
 	return (
 		<AppProvider publication={publication}>

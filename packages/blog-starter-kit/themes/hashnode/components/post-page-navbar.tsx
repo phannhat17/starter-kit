@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
 import { twJoin } from 'tailwind-merge';
+import ThemeToggleButton from './ThemeToggleButton';
 
 /* eslint-disable no-nested-ternary */
 import HeaderBlogSearch from './header-blog-search';
@@ -49,12 +50,14 @@ const PostPageNavbar = forwardRef<HTMLElement, Props>((props, ref) => {
 				<div className={twJoin('flex flex-row items-center', 'dark:text-white')}>
 					{/* Moved PublicationNavLinks here */}
 					<div className="hidden md:block">
-							<PublicationNavLinks
-								enabledPages={publication.preferences?.enabledPages}
-								navbarItems={publication.preferences?.navbarItems || []}
-							/>
-						</div>
+						<PublicationNavLinks
+							enabledPages={publication.preferences?.enabledPages}
+							navbarItems={publication.preferences?.navbarItems || []}
+						/>
+					</div>
 					<HeaderBlogSearch publication={publication} />
+					<ThemeToggleButton />
+
 					<div className="md:hidden">
 						<HeaderLeftSidebar publication={publication} />
 					</div>
