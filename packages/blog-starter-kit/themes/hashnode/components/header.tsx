@@ -17,7 +17,7 @@ export const Header = (props: Props) => {
 	return (
 		<header className="blog-header relative z-50 w-full border-b border-black/10 bg-white bg-opacity-70 dark:border-white/10 dark:bg-slate-900 dark:bg-opacity-70">
 			<div className="container mx-auto px-2 md:px-4 2xl:px-10">
-				<div className="relative z-40 flex flex-row items-center justify-between pb-2 pt-4 md:mb-4">
+				<div className="relative z-40 flex flex-row items-center justify-between pt-2 md:mb-4">
 					<div className="flex flex-row items-center">
 						{/* Navigation for mobile view */}
 						<div className="flex items-center justify-between dark:text-white md:hidden">

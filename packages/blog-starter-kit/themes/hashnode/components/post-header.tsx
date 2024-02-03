@@ -119,7 +119,7 @@ export const PostHeader = ({ post, morePosts }: Props) => {
 				<div className="col-span-full lg:col-span-6 lg:col-start-2 rounded-md">
 					{/* Top cover */}
 					{post.coverImage?.url && !post.preferences.stickCoverToBottom && (
-						<div className="relative">
+						<div className="relative mt-4">
 							<CustomImage
 								className="md:rounded-[0.5rem] mb-0 block w-full"
 								placeholder="blur"
