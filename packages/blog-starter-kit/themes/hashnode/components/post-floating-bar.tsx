@@ -20,13 +20,13 @@ function PostFloatingMenu(props: {
 }) {
 	const { isPublicationPost, post, shareText, showPaymentModal, openComments, list } = props;
 
-  // Function to scroll back to top
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth', // For smooth scrolling
-    });
-  };
+	// Function to scroll back to top
+	const scrollToTop = () => {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth', // For smooth scrolling
+		});
+	};
 
 	const handleFloatingBarDisplay = () => {
 		const blogHeader = document.querySelector('.blog-header');
@@ -73,9 +73,8 @@ function PostFloatingMenu(props: {
 	// Best practice to have the accessible name being with the visible text (comment count)
 	const commentBtnAccessibleLabel =
 		post?.responseCount > 0
-			? `${kFormatter(post.responseCount + (post.replyCount || 0))} comment${
-					post.responseCount === 1 ? '' : 's'
-			  }, open the comments`
+			? `${kFormatter(post.responseCount + (post.replyCount || 0))} comment${post.responseCount === 1 ? '' : 's'
+			}, open the comments`
 			: 'Open comments';
 
 	return (
@@ -146,21 +145,21 @@ function PostFloatingMenu(props: {
 					<Separator className="mx-2 h-5" />
 
 					<PostFloatingBarTooltipWrapper label="Back to top">
-            <div>
-              <button
-                type="button"
-                onClick={scrollToTop}
-                aria-label="Back to top"
-                className="outline-none! flex cursor-pointer items-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800"
-              >
-                <span className="rounded-full p-2">
-                  {/* Replace this with an UpArrowIcon component or directly use an SVG */}
-                  <UpArrowSVG className="h-4 w-4 stroke-current text-slate-800 dark:text-slate-50 sm:h-5 sm:w-5 2xl:h-6 2xl:w-6" />
-                  {/* If you don't have an UpArrowIcon component, you can directly use an SVG here */}
-                </span>
-              </button>
-            </div>
-          </PostFloatingBarTooltipWrapper>
+						<div>
+							<button
+								type="button"
+								onClick={scrollToTop}
+								aria-label="Back to top"
+								className="outline-none! flex cursor-pointer items-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800"
+							>
+								<span className="rounded-full p-2">
+									{/* Replace this with an UpArrowIcon component or directly use an SVG */}
+									<UpArrowSVG className="h-4 w-4 stroke-current text-slate-800 dark:text-slate-50 sm:h-5 sm:w-5 2xl:h-6 2xl:w-6" />
+									{/* If you don't have an UpArrowIcon component, you can directly use an SVG here */}
+								</span>
+							</button>
+						</div>
+					</PostFloatingBarTooltipWrapper>
 				</div>
 			</div>
 		</Tooltip.Provider>
