@@ -12,10 +12,11 @@ import {
 import { twJoin } from 'tailwind-merge';
 import PublicationPosts from '../../components/publication-posts';
 import { useQuery } from 'urql';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { WithUrqlProps, initUrqlClient } from 'next-urql';
 import { createHeaders, createSSRExchange, getUrqlClientConfig } from '../../lib/api/client';
 import PublicationFooter from '../../components/publication-footer';
+import { useThemeStore } from '../../components/contexts/themeContext';
 
 type Props = GetServerSideProps &
   Required<WithUrqlProps> & {
@@ -50,6 +51,12 @@ export default function Series({ series, publication, posts, seriesSlug, current
 		  setAfter(postData.edges[postData.edges.length - 1].cursor);
 		}
 	};
+
+	const { theme } = useThemeStore();
+
+	useEffect(() => {
+		document.body.className = theme;
+	}, [theme]);
 
 	return (
 		<AppProvider publication={publication}>

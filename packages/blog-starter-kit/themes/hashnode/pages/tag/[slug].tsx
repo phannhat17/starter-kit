@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { twJoin } from 'tailwind-merge';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from 'urql';
 import { initUrqlClient } from 'next-urql';
 
@@ -17,6 +17,7 @@ import ExternalLinkSVG from '../../components/icons/svgs/ExternalLinkSVG';
 import { createHeaders, createSSRExchange, getUrqlClientConfig } from '../../lib/api/client';
 import PublicationPosts from '../../components/publication-posts';
 import PublicationFooter from '../../components/publication-footer';
+import { useThemeStore } from '../../components/contexts/themeContext';
 
 const INITIAL_LIMIT = 6;
 
@@ -44,6 +45,13 @@ export default function Post({ publication, posts, tag, slug, currentMenuId }: P
 		setAfter(postData.edges[postData.edges.length - 1].cursor);
 		}
 	};
+
+	const { theme } = useThemeStore();
+
+	useEffect(() => {
+		document.body.className = theme;
+	}, [theme]);
+
 	return (
 		<AppProvider publication={publication}>
 			<Layout>

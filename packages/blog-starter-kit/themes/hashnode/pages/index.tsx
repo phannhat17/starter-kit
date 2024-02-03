@@ -136,7 +136,7 @@ export default function Index(
 					/>
 				</Head>
 				<Header isHome={true} />
-				<div className="scroll-smooth">
+				<div className="scroll-smooth dark:bg-slate-900">
 					{postsToBeRendered.edges.length > 0 ? (
 						<FeaturedPosts
 							posts={postsToBeRendered.edges.map((p: any) => p.node).slice(0, 3)}
