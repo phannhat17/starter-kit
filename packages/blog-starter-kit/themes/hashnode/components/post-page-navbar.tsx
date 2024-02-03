@@ -47,7 +47,7 @@ const PostPageNavbar = forwardRef<HTMLElement, Props>((props, ref) => {
 					</div>
 				</div>
 
-				<div className={twJoin('flex flex-row items-center', 'dark:text-white')}>
+				<div className="mt-auto flex flex-row items-center dark:text-white md:mt-3">
 					{/* Moved PublicationNavLinks here */}
 					<div className="hidden md:block">
 						<PublicationNavLinks
