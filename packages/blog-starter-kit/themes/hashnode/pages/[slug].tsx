@@ -14,9 +14,9 @@ import { twJoin } from 'tailwind-merge';
 import { Container } from '../components/container';
 import { AppProvider } from '../components/contexts/appContext';
 import { useThemeStore } from '../components/contexts/themeContext';
-import { Header } from '../components/header';
 import { Layout } from '../components/layout';
 import { PostHeader } from '../components/post-header';
+import PostPageNavbar from '../components/post-page-navbar';
 import PublicationFooter from '../components/publication-footer';
 import StaticPageContent from '../components/static-page-content';
 import {
@@ -130,8 +130,8 @@ export default function PostOrPage(props: Props) {
 							'border-black/10 bg-white bg-opacity-70 dark:border-white/10 dark:bg-slate-900 dark:bg-opacity-70',
 						)}
 					>
-						<Header isHome={false} />
-						{/* <PostPageNavbar publication={publication} ref={headerRef} /> */}
+						{/* <Header isHome={false} /> */}
+						<PostPageNavbar publication={publication} ref={headerRef} />
 					</header>
 					<Container>
 						<article className="flex flex-col items-start gap-10 pb-10">
@@ -184,7 +184,9 @@ export default function PostOrPage(props: Props) {
 						}}
 					/>
 				</Head>
-				<Header isHome={false} />
+				{/* <Header isHome={false} /> */}
+				<PostPageNavbar publication={publication} ref={headerRef} />
+
 				<Container>
 					<article className="flex flex-col items-start gap-10 pb-10">
 						<Page {...props} />
