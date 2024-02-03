@@ -4,6 +4,7 @@ import { resizeImage, getBlurHash } from '../utils/image';
 import { Preferences, User, Maybe, PublicationFragment } from '../generated/graphql';
 import { twJoin } from 'tailwind-merge';
 import { generateBlogTitleWithoutDisplayTitle } from '../utils/commonUtils';
+import { useThemeStore } from './contexts/themeContext';
 
 type PublicationLogoProps = {
   publication: Pick<PublicationFragment, 'title' | 'isTeam'> & {
@@ -49,7 +50,7 @@ const CustomLogo = ({
     <h1 className="blog-main-logo">
       <Link
         className={twJoin(
-          'blog-logo focus-ring-base flex flex-row items-center','focus-ring-colors-base',
+          'blog-logo focus-ring-base flex flex-row items-center', 'focus-ring-colors-base',
           logoSizes[size],
         )}
         aria-label={`${blogTitle} home page`}
@@ -91,13 +92,13 @@ const DefaultLogo = ({
       className={twJoin(
         'blog-title',
         textStyles[size],
-        'break-words font-heading font-semibold leading-snug md:font-bold','dark:text-white',
+        'break-words font-heading font-semibold leading-snug md:font-bold', 'dark:text-white',
       )}
     >
       <Link
         href={`/${isPostPage ? '?source=top_nav_blog_home' : ''}`}
         className={twJoin(
-          'focus-ring-base flex flex-row items-center','focus-ring-colors-base',
+          'focus-ring-base flex flex-row items-center', 'focus-ring-colors-base',
         )}
         aria-label={`${blogTitle} home page`}
       >
@@ -123,13 +124,14 @@ const DefaultLogo = ({
 function PublicationLogo(props: PublicationLogoProps) {
   const { publication, size, withProfileImage, isPostPage } = props;
   const { preferences } = publication;
+  const { theme } = useThemeStore(); // Assuming you have a hook to access the current theme
 
   if (!publication) {
     return null;
   }
   const useLogo = false || preferences.logo;
   if (useLogo) {
-    const logoSrc = false ? preferences.darkMode?.logo : preferences.logo;
+    const logoSrc = theme === 'dark' && preferences.darkMode?.logo ? preferences.darkMode.logo : preferences.logo;
     return (
       <CustomLogo
         publication={publication}
