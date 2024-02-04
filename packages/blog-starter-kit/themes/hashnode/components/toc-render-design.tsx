@@ -45,39 +45,68 @@ function TocRow(props: TocRowProps) {
   };
 
   return (
-    <li key={node.id} className="px-2 py-0.5 align-middle">
-      <div
-        className={twJoin(
-          'flex items-center gap-2 rounded-lg',
-          modal ? 'hover:bg-slate-100 dark:hover:bg-slate-800' : 'hover:underline',
-        )}
+    <li>
+      <a
+        href={`#heading-${node.slug}`}
+        aria-label={node.title}
+        className="mb-1 flex items-center gap-x-2 rounded-lg px-2 focus:outline-none hover:bg-slate-100 focus:bg-slate-100 dark:hover:bg-slate-800 dark:focus:bg-slate-800"
+        onClick={(e) => scrollToElement(e, `heading-${node.slug}`)}
       >
-        {node.hasChildren && (
-          <button
-            type="button"
-            className="pl-2.5 text-slate-400"
-            onClick={() => {
-              setChildrenVisibility((prevVisibility: boolean) => !prevVisibility);
-            }}
-          >
-            {childrenVisibility ? (
-              <ChevronDownSVG_16x16 className="h-4 w-4 stroke-current" />
-            ) : (
-              <ChevronRightSVG_16x16 className="h-4 w-4 stroke-current" />
-            )}
-          </button>
-        )}
-        <a
+        <div className="w-full break-words py-2 text-base focus:outline-none text-slate-700  dark:text-slate-200" dangerouslySetInnerHTML={{ __html: node.title }}
           id={node.id}
-          className="w-full py-2.5 pr-2.5 text-sm font-medium text-slate-800 dark:text-slate-100"
-          href={`#heading-${node.slug}`}
-          onClick={(e) => scrollToElement(e, `heading-${node.slug}`)}
-          dangerouslySetInnerHTML={{ __html: node.title }}
-          aria-label={node.title}
-        />
-      </div>
+        ></div>
+      </a>
+      {node.hasChildren && (
+        <button
+          type="button"
+          className="pl-2.5 text-slate-400"
+          onClick={() => {
+            setChildrenVisibility((prevVisibility: boolean) => !prevVisibility);
+          }}
+        >
+          {childrenVisibility ? (
+            <ChevronDownSVG_16x16 className="h-4 w-4 stroke-current" />
+          ) : (
+            <ChevronRightSVG_16x16 className="h-4 w-4 stroke-current" />
+          )}
+        </button>
+      )}
       {node.hasChildren ? <>{childrenVisibility && <div className="pl-5">{children}</div>}</> : <>{children}</>}
+
     </li>
+    // <li key={node.id} className="px-2 py-0.5 align-middle">
+    //   <div
+    //     className={twJoin(
+    //       'flex items-center gap-2 rounded-lg',
+    //       modal ? 'hover:bg-slate-100 dark:hover:bg-slate-800' : 'hover:underline',
+    //     )}
+    //   >
+    //     {node.hasChildren && (
+    //       <button
+    //         type="button"
+    //         className="pl-2.5 text-slate-400"
+    //         onClick={() => {
+    //           setChildrenVisibility((prevVisibility: boolean) => !prevVisibility);
+    //         }}
+    //       >
+    //         {childrenVisibility ? (
+    //           <ChevronDownSVG_16x16 className="h-4 w-4 stroke-current" />
+    //         ) : (
+    //           <ChevronRightSVG_16x16 className="h-4 w-4 stroke-current" />
+    //         )}
+    //       </button>
+    //     )}
+    //     <a
+    //       id={node.id}
+    //       className="w-full py-2.5 pr-2.5 text-sm font-medium text-slate-800 dark:text-slate-100"
+    //       href={`#heading-${node.slug}`}
+    //       onClick={(e) => scrollToElement(e, `heading-${node.slug}`)}
+    //       dangerouslySetInnerHTML={{ __html: node.title }}
+    //       aria-label={node.title}
+    //     />
+    //   </div>
+    //   {node.hasChildren ? <>{childrenVisibility && <div className="pl-5">{children}</div>}</> : <>{children}</>}
+    // </li>
   );
 }
 
@@ -124,7 +153,7 @@ function TocTree(props: TocTreeProps) {
   }
 
   return (
-    <ul className="list-inside font-semibold dark:border-slate-800">
+    <ul className="pl-4 dark:border-slate-800">
       {nodes.map((node) => (
         <TocRow key={node.id} node={node} modal={modal}>
           <TocTree
@@ -159,45 +188,49 @@ const TocRenderDesign = (props: TocRenderDesignProps) => {
   return (
     <div
       className={twJoin(
-        'relative mb-10 w-full overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 pt-0 dark:border-slate-800 dark:bg-slate-900',
-        modal && 'mb-0 rounded-none border-none px-0 py-4',
+        'relative w-full overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900 mx-auto',
+        modal ? 'mb-0 rounded-none border-none' : 'mb-10 max-w-[812px]',
       )}
+
       ref={tocContainerRef}
     >
       <div className={tocFullVisibility ? 'max-h-full' : 'max-h-[388px] overflow-hidden'}>
         {/* Header */}
-        {modal || (
-          <div className="pt-4">
-            <h2 className="px-[18px] py-2 text-sm font-medium uppercase text-slate-500 dark:text-slate-400">
+        <div className="pr-4 pb-4">
+
+          {modal || (
+            <h2 className="px-6 py-5 pb-4 text-lg font-semibold text-slate-800 dark:text-slate-100">
               <span>Table of contents</span>
             </h2>
-          </div>
-        )}
-        {/* Body */}
-        {list?.length === 0 ? (
-          <div className="flex h-[388px] flex-col items-center justify-center gap-2">
-            <div className="relative h-[110px] w-[110px]">
-              <Image
-                src="https://cdn.hashnode.com/res/hashnode/image/upload/v1686858363512/7ad376cf-1646-4bd4-b74c-25cf8f47238b.png"
-                alt="No heading"
-                layout="fill"
-              />
-            </div>
-            <h3 className="text-center text-sm text-slate-700">
-              No headings in the {isDraftPreview ? 'draft' : 'article'}.
-            </h3>
-          </div>
-        ) : (
-          <>
-            <TocTree list={list} modal={modal} />
-            {/* Overlay */}
-            {!tocFullVisibility && isOverflowing && (
-              <div className="absolute bottom-0 right-0 w-full">
-                <div className="h-40 bg-gradient-to-t from-white to-transparent dark:from-slate-900" />
+          )}
+          {/* Body */}
+
+          {list?.length === 0 ? (
+            <div className="flex h-[388px] flex-col items-center justify-center gap-2">
+              <div className="relative h-[110px] w-[110px]">
+                <Image
+                  src="https://cdn.hashnode.com/res/hashnode/image/upload/v1686858363512/7ad376cf-1646-4bd4-b74c-25cf8f47238b.png"
+                  alt="No heading"
+                  layout="fill"
+                />
               </div>
-            )}
-          </>
-        )}
+              <h3 className="text-center text-sm text-slate-700">
+                No headings in the {isDraftPreview ? 'draft' : 'article'}.
+              </h3>
+            </div>
+          ) : (
+            <>
+              <TocTree list={list} modal={modal} />
+              {/* Overlay */}
+              {!tocFullVisibility && isOverflowing && (
+                <div className="absolute bottom-0 right-0 w-full">
+                  <div className="h-40 bg-gradient-to-t from-white to-transparent dark:from-slate-900" />
+                </div>
+              )}
+            </>
+          )}
+        </div>
+
       </div>
 
       {/* Show more toggle option */}

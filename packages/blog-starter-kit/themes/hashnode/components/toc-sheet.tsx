@@ -62,12 +62,12 @@ function TocSheet({ list }: { list: any[] }) {
             />
             <DialogPrimitive.Content
               className={`
-                fixed bottom-0 left-0 right-0 z-50 flex h-fc max-w-[1200px] flex-col items-center overflow-hidden rounded-2xl rounded-bl-none rounded-br-none border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900 md:top-50 md:left-50 md:w-[40rem] md:-translate-x-1/2 md:-translate-y-1/2 md:rounded-bl-2xl md:rounded-br-2xl lg:w-[40rem]`}
+              fixed inset-0 left-50 top-50 z-50 flex h-fc w-[90%] max-w-[40rem] -translate-x-1/2 -translate-y-1/2 flex-col items-center overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900`}
               onEscapeKeyDown={closeModal}
             >
               <>
-                <div className="z-50 flex w-full items-center justify-between p-4 pb-0">
-                  <DialogPrimitive.DialogTitle className="py-2 text-sm font-medium uppercase text-slate-500 dark:text-slate-400">
+                <div className="relative z-50 flex w-full items-center justify-between px-6 pb-4 pt-5">
+                  <DialogPrimitive.DialogTitle className="font-heading text-lg font-semibold text-slate-800 dark:text-slate-100">
                     Table of contents
                   </DialogPrimitive.DialogTitle>
 
@@ -75,7 +75,7 @@ function TocSheet({ list }: { list: any[] }) {
                     <div className="flex justify-between gap-2">
                       <Button
                         type="button"
-                        className="p-1 text-sm text-slate-600 focus:outline-none focus-visible:ring focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:text-slate-300 dark:focus-visible:ring-offset-slate-800"
+                        className="rounded-full border border-transparent text-base font-medium leading-relaxed dark:text-slate-200 hover:bg-slate-200 disabled:opacity-50 hover:dark:bg-slate-700 flex flex-row items-center absolute right-3 top-3 p-2 text-slate-600 focus:bg-slate-200 focus:outline-none dark:focus:bg-slate-700"
                         onClick={closeModal}
                         aria-label="Close table of contents modal"
                         variant="transparent"
@@ -87,7 +87,7 @@ function TocSheet({ list }: { list: any[] }) {
                 </div>
 
                 <CustomScrollArea>
-                  <div className="max-h-[560px]">
+                  <div className="max-h-[500px] md:max-h-[560px]">
                     <TocRenderDesign list={list} hideShowMoreOption modal />
                   </div>
                 </CustomScrollArea>
