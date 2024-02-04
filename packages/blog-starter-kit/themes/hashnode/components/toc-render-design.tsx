@@ -30,6 +30,7 @@ function TocRow(props: TocRowProps) {
   const { children, node, modal } = props;
   const [childrenVisibility, setChildrenVisibility] = useState(false);
   const { hide: hideTocModal } = useTocModalStore();
+  const [isActive, setIsActive] = useState(false);
 
   const scrollToElement = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, targetId: string) => {
     event.preventDefault(); // Prevent the default anchor behavior
@@ -44,12 +45,32 @@ function TocRow(props: TocRowProps) {
     }
   };
 
+  useEffect(() => {
+    const targetElement = document.getElementById(`heading-${node.slug}`);
+  
+    if (targetElement) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            setIsActive(entry.isIntersecting);
+          });
+        },
+        { rootMargin: '0px', threshold: 0.1 } // Customize these values based on your needs
+      );
+  
+      observer.observe(targetElement);
+  
+      return () => observer.disconnect();
+    }
+  }, [node.slug]);
+  
+
   return (
     <li>
       <a
         href={`#heading-${node.slug}`}
         aria-label={node.title}
-        className="mb-1 flex items-center gap-x-2 rounded-lg px-2 focus:outline-none hover:bg-slate-100 focus:bg-slate-100 dark:hover:bg-slate-800 dark:focus:bg-slate-800"
+        className={`mb-1 flex items-center gap-x-2 rounded-lg px-2 focus:outline-none hover:bg-slate-100 focus:bg-slate-100 dark:hover:bg-slate-800 dark:focus:bg-slate-800 ${isActive ? 'bg-blue-50 hover:bg-blue-50 dark:bg-blue-950 dark:hover:bg-blue-950' : 'a'}`}
         onClick={(e) => scrollToElement(e, `heading-${node.slug}`)}
       >
         <div className="w-full break-words py-2 text-base focus:outline-none text-slate-700  dark:text-slate-200" dangerouslySetInnerHTML={{ __html: node.title }}
