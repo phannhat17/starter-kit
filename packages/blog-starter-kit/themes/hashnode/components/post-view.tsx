@@ -102,7 +102,7 @@ function PostView(props: any) {
                     <ProfileImage user={post.author} width="200" height="200" hoverDisabled={props.isPublicationPost} />
                     </div>
                     <a
-                    href={`https://hashnode.com/@${post.author.username}`}
+                    href="https://phannhat.vercel.app"
                     className="font-medium text-slate-900 dark:text-white"
                     >
                     <span>{post.author.name}</span>
@@ -161,7 +161,6 @@ function PostView(props: any) {
                 {post.features.tableOfContents.isEnabled && <TocRenderDesign list={toc} />}
 
                 {/* temporarily hiding the modal */}
-
                 <div id="post-content-parent" className="relative mb-10 pb-14">
                     {memoizedPostContent && (
                     <div

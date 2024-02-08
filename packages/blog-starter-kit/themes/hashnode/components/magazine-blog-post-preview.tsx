@@ -65,7 +65,7 @@ function BlogPostPreview(props: {
 				<div className="flex flex-col items-start leading-snug">
 					<a
 						className="block font-semibold text-slate-700 dark:text-slate-400"
-						href={`https://hashnode.com/@${post.author.username}`}
+						href="https://phannhat.vercel.app"
 						onMouseOver={preload}
 						onFocus={() => undefined}
 					>

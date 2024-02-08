@@ -897,8 +897,6 @@ export type MyUser = IUser & Node & {
   dateJoined?: Maybe<Scalars['DateTime']['output']>;
   /** Whether or not the user is deactivated. */
   deactivated: Scalars['Boolean']['output'];
-  /** Email address of the user. Only available to the authenticated user. */
-  email?: Maybe<Scalars['String']['output']>;
   /** The users who are following this user */
   followers: UserConnection;
   /** The number of users that follow the requested user. Visible in the user's profile. */
@@ -926,8 +924,6 @@ export type MyUser = IUser & Node & {
   tagline?: Maybe<Scalars['String']['output']>;
   /** Returns a list of tags that the user follows. */
   tagsFollowing: Array<Tag>;
-  /** Hashnode users are subscribed to a newsletter by default. This field can be used to unsubscribe from the newsletter. Only available to the authenticated user. */
-  unsubscribeCode?: Maybe<Scalars['String']['output']>;
   /** The username of the user. It is unique and tied with user's profile URL. Example - https://hashnode.com/@username */
   username: Scalars['String']['output'];
 };
@@ -2179,7 +2175,8 @@ export enum Scope {
   WebhookAdmin = 'webhook_admin',
   WriteDraft = 'write_draft',
   WritePost = 'write_post',
-  WriteSeries = 'write_series'
+  WriteSeries = 'write_series',
+  WriteStaticPage = 'write_static_page'
 }
 
 /**

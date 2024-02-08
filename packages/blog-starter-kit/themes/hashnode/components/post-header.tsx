@@ -193,7 +193,7 @@ export const PostHeader = ({ post, morePosts }: Props) => {
 							)}
 							{!post.coAuthors?.length && (
 								<a
-									href={`https://hashnode.com/@${post.author.username}`}
+									href="https://phannhat.vercel.app"
 									className="ml-2 font-semibold text-slate-600 dark:text-white md:ml-0"
 								>
 									<span>{post.author.name}</span>
