@@ -78,7 +78,7 @@ export default function Post({ publication, posts, tag, slug, currentMenuId }: P
 							<p className="text-lg text-slate-600 dark:text-slate-400">#{tag.slug}</p>
 							</div>
 						</div>
-						{tag && (
+						{/* {tag && (
 						<div className="flex w-full flex-col items-start xl:w-auto xl:items-end xl:text-right">
 							<a
 								className="mb-2 flex flex-row items-center whitespace-nowrap rounded-lg border bg-white px-4 py-2 font-medium text-blue-600 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700"
@@ -92,7 +92,7 @@ export default function Post({ publication, posts, tag, slug, currentMenuId }: P
 							</a>
 							<p className="text-sm text-slate-700 dark:text-slate-400">Read more stories on Hashnode</p>
 						</div>
-						)}
+						)} */}
 						</div>
 					</div>
 					{posts.edges.length > 0 && (
